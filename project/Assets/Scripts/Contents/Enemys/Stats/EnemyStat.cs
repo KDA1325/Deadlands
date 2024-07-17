@@ -209,15 +209,15 @@ public class EnemyStat : MonoBehaviour
         {
             _player.GetComponent<PCStat_Freeze>().TryFreeze(this);
         }
-        else
-        {
-            GameObject freezeEffect = freezeEffectTransform.gameObject;
+        //else
+        //{
+        //    GameObject freezeEffect = freezeEffectTransform.gameObject;
 
-            if (freezeEffect.activeSelf == false)
-            {
-                _player.GetComponent<PCStat_Freeze>().TryFreeze(this);
-            }
-        }
+        //    if (freezeEffect.activeSelf == false)
+        //    {
+        //        _player.GetComponent<PCStat_Freeze>().TryFreeze(this);
+        //    }
+        //}
 
         Transform flameEffectTransform = transform.Find("Flame");
         if (flameEffectTransform == null)

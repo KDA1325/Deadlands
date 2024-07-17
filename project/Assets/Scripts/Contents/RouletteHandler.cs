@@ -21,8 +21,8 @@ public class RouletteHandler : MonoBehaviour
 
     void Update()
     {
-        if(_update)
-        RotateRoulette();
+        if (_update)
+            RotateRoulette();
     }
 
     void RotateRoulette()
@@ -43,6 +43,7 @@ public class RouletteHandler : MonoBehaviour
             transform.Rotate(Vector3.forward * rotationSpeed * Time.unscaledDeltaTime);
         }
     }
+
     private void DisplayRewardUI()
     {
         UI_Alarm alarm = Managers.UI.ShowPopupUI<UI_Alarm>();
@@ -55,28 +56,39 @@ public class RouletteHandler : MonoBehaviour
         float currentAngle = wheel.rotation.eulerAngles.z;
         float earnGold = ObjectHandler.Player.GetComponent<PCStat_Gold>().GetEarnGold();
 
-        if(isReceive != true)
+        Debug.Log("Current Angle: " + currentAngle);
+        Debug.Log("Earned Gold: " + earnGold);
+
+        if (isReceive != true)
         {
+            int goldToAdd = 0;
             if (currentAngle <= 90 && currentAngle > 66)
             {
-                Managers.Gold.EarnGold((int)((earnGold * 1.4) - earnGold));
+                goldToAdd = (int)(earnGold * 1.4f);
+                Debug.Log("Adding Gold (1.4x): " + goldToAdd);
             }
             else if (currentAngle <= 66 && currentAngle > 35)
             {
-                Managers.Gold.EarnGold((int)((earnGold * 1.2) - earnGold));
+                goldToAdd = (int)(earnGold * 1.2f);
+                Debug.Log("Adding Gold (1.2x): " + goldToAdd);
             }
-            else if ((currentAngle <= 35 && currentAngle > 0) || currentAngle <= 360 && currentAngle > 325)
+            else if ((currentAngle <= 35 && currentAngle > 0) || (currentAngle <= 360 && currentAngle > 325))
             {
-                Managers.Gold.EarnGold((int)((earnGold * 1) - earnGold));
+                goldToAdd = (int)(earnGold * 1f);
+                Debug.Log("Adding Gold (1x): " + goldToAdd);
             }
             else if (currentAngle <= 325 && currentAngle > 290)
             {
-                Managers.Gold.EarnGold((int)((earnGold * 2.5) - earnGold));
+                goldToAdd = (int)(earnGold * 2.5f);
+                Debug.Log("Adding Gold (2.5x): " + goldToAdd);
             }
             else if (currentAngle <= 290 && currentAngle > 270)
             {
-                Managers.Gold.EarnGold((int)((earnGold * 4) - earnGold));
+                goldToAdd = (int)(earnGold * 4f);
+                Debug.Log("Adding Gold (4x): " + goldToAdd);
             }
+
+            Managers.Gold.EarnGold(goldToAdd);
         }
 
         isReceive = true;

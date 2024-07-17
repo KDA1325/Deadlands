@@ -52,6 +52,7 @@ public class PCStat_Freeze : PCStat_Base
         if (enemy.activeSelf == true)
         {
             enemyStat.Move_Speed -= enemyStat.Move_Speed * (FreezeSlowDefault + _freezeSlow / 100) ;
+            Debug.Log(enemyStat.Move_Speed);
         }
     }
 }

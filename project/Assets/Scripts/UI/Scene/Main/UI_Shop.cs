@@ -9,11 +9,20 @@ public class UI_Shop : UI_Scene
     private Button[] btns;
 
     private bool isPurchasing = false;
+    private bool isShowing = false;
 
     public void ShowReward50Gold()
     {
-        Managers.Ads.SetReward50Gold();
-        Managers.Ads.ShowAd();
+        // 광고 시청 전 모든 버튼 비활성화 
+        SetBtnsInteractable(false);
+
+        if (!isShowing)
+        {
+            StartCoroutine(ShowRewardCoroutine());
+
+            isShowing = true;
+        }
+
     }
 
     public void InApp_200Gold()
@@ -61,6 +70,23 @@ public class UI_Shop : UI_Scene
         SetBtnsInteractable(true);
 
         isPurchasing = false;
+    }
+    
+    private IEnumerator ShowRewardCoroutine()
+    {
+        // 광고 시청
+        Managers.Ads.ShowAd();
+
+        // 50골드 보상 지급
+        Managers.Ads.SetReward50Gold();
+
+        // 비활성화 유지 
+        yield return new WaitForSeconds(0.1f);
+
+        // 보상 지급 UI 출력 후 모든 Btns 활성화
+        SetBtnsInteractable(true);
+
+        isShowing = false;
     }
 
     public void SetBtnsInteractable(bool interactable)

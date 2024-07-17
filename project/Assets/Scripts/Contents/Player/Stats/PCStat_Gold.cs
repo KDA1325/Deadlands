@@ -5,6 +5,7 @@ using UnityEngine;
 public class PCStat_Gold : PCStat_Base
 {
     float _originGold = 0;
+    int _inGameGold = 0;
 
     [SerializeField]
     float _additionalCoinObtain;
@@ -18,12 +19,14 @@ public class PCStat_Gold : PCStat_Base
         _coinObtainPercent = (int)GetOutGameStat(Define.OutGameStat.CoinObtainPercent);
         _coinObtainRatio = (int)GetOutGameStat(Define.OutGameStat.CoinObtainRatio);
         _originGold = Managers.Gold.CurrentGold;
+        _inGameGold = Managers.Gold.InGameGold;
     }
 
     public float GetEarnGold()
     {
-        float currentGold = Managers.Gold.CurrentGold;
-        return Mathf.Max(0, currentGold - _originGold);
+        float currentGold = Managers.Gold.InGameGold;
+        return currentGold;
+        //return Mathf.Max(0, currentGold - _inGameGold);
     }
 
     public void SetAdditionalCoinObtain(float additionalCoinObtain)
@@ -34,6 +37,6 @@ public class PCStat_Gold : PCStat_Base
     public void KillCompensation()
     {
         if (Random.Range(0, 100) < _coinObtainPercent)
-            Managers.Gold.EarnGold(_coinObtainRatio + (int)(_coinObtainRatio * _additionalCoinObtain));
+            Managers.Gold.InGameEarnGold(_coinObtainRatio + (int)(_coinObtainRatio * _additionalCoinObtain));
     }
 }

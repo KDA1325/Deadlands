@@ -43,7 +43,7 @@ public class UI_Failed : UI_Popup
 
         // 에디터 상에서 테스트가 필요할 경우 조건 '|| Application.isEditor' 추가 후 진행
         // 안드로이드
-        if (Application.platform == RuntimePlatform.Android )
+        if (Application.platform == RuntimePlatform.Android || Application.isEditor)
         {
             _roulette.SetActive(true); 
             _rouletteNiddle.SetActive(true);
@@ -58,7 +58,7 @@ public class UI_Failed : UI_Popup
     public void OnGetRewardButton()
     {
         // 안드로이드
-        if (Application.platform == RuntimePlatform.Android )
+        if (Application.platform == RuntimePlatform.Android || Application.isEditor)
         {
             _rouletteHandler.CheckReward();
         }

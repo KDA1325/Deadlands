@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Define
 {
+    public const string nullToken = "null";
+    public const string googleToken = "Google";
+    public const string appleToken = "Apple";
+
     public enum ObjectType
     {
         None,
@@ -17,6 +21,7 @@ public class Define
         None,
         GameScene,
         MainScene,
+        Title,
     }
 
     public enum Layer
@@ -147,4 +152,11 @@ public class Define
         Thief,
         Sniper
     }
+    public enum Federation
+    {
+        None = 0,
+        Google,
+        Apple
+    }
+
 }

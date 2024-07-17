@@ -30,7 +30,7 @@ public class EnemyCtrl_Attack : MonoBehaviour
                 {
                     if (_stat.enemyType == Define.EnemyType.Thief)
                     {
-                        Managers.Gold.UseGold((int)_stat.Att_Damage);
+                        Managers.Gold.StolenGold((int)_stat.Att_Damage);
                         _goldStolen = true;
                     }
                     else
